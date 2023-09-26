@@ -35,8 +35,8 @@ fun main()
 
         if (discr > 0)
         {
-            val x1 = (-b + sqrt(discr)) / 2
-            val x2 = (-b - sqrt(discr)) / 2
+            val x1 = (-b + sqrt(discr)) / (2 * a)
+            val x2 = (-b - sqrt(discr)) / (2 * a)
             println("Корни:\n x1 = $x1, x2 = $x2")
         }
         else if (discr == 0f)
