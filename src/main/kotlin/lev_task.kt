@@ -2,9 +2,9 @@ import kotlin.math.sqrt
 
 fun main()
 {
-    var a: Float = 0.0f
-    var b: Float = 0.0f
-    var c: Float = 0.0f
+    var a = 0.0f
+    var b= 0.0f
+    var c= 0.0f
 
     while(true)
     {
@@ -28,21 +28,13 @@ fun main()
             }
         }
 
-
         println("Вы ввели:\n a = $a, b = $b, c = $c")
 
-        val discr = calculate_discr(a, b, c)
-
-        if (discr > 0)
-        {
-            val x1 = (-b + sqrt(discr)) / (2 * a)
-            val x2 = (-b - sqrt(discr)) / (2 * a)
-            println("Корни:\n x1 = $x1, x2 = $x2")
-        }
-        else if (discr == 0f)
-            println("Корень x1 = x2 = ${-b / 2}")
-        else
+        val (x1, x2) = (calculate_reshenie(a, b, c))
+        if (x1 == null && x2 == null)
             println("Корней нет")
+        else
+            println("Корни: x1 = $x1, x2 = $x2")
 
         when(continue_test())
         {
@@ -57,6 +49,37 @@ fun main()
 fun calculate_discr(a: Float, b: Float, c: Float): Float
 {
     return (b * b) - (4 * a * c)
+}
+
+fun calculate_reshenie(a: Float, b: Float, c: Float): Pair<Float?, Float?>
+{
+    val discr = calculate_discr(a, b, c)
+    var x1: Float?
+    var x2: Float?
+
+    if (a == 0f)
+    {
+        val solution = -c / b
+        x1 = solution
+        x2 = solution
+    }
+    else if (discr > 0)
+    {
+        x1 = (-b + sqrt(discr)) / (2 * a)
+        x2 = (-b - sqrt(discr)) / (2 * a)
+    }
+    else if (discr == 0f)
+    {
+        val solution = -b / (2 * a)
+        x1 = solution
+        x2 = solution
+    }
+    else
+    {
+        x1 = null
+        x2 = null
+    }
+    return Pair(x1, x2)
 }
 
 fun continue_test(): Boolean
